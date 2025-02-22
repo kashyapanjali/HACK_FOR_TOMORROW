@@ -35,7 +35,9 @@ const Navbar = () => {
 			<nav className='nav-links'>
 				<a href='/home'>Home</a>
 				<a href='/compare'>Dance-Compare</a>
-				<a href='/services'>Feedback</a>
+				<a href='/feedback'>Feedback</a>
+				<a href='/improve'>Improve</a>
+
 				<a
 					href='/login'
 					className='login-btn'>

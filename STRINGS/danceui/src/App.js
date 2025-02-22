@@ -5,7 +5,8 @@ import Navbar from "./component/Navbar";
 import Home from "./component/Home";
 import Compare from "./component/Compare";
 import Auth from "./component/Auth";
-import Result from "./component/Result";
+import Improve from "./component/Improve";
+import Feedback from "./component/Feedback";
 
 function App() {
 	return (
@@ -25,10 +26,14 @@ function App() {
 						path='/login'
 						element={<Auth />}
 					/>
-					{/* <Route
-						path='/services'
-						element={<Result />}
-					/> */}
+					<Route
+						path='/improve'
+						element={<Improve />}
+					/>
+					<Route
+						path='/feedback'
+						element={<Feedback />}
+					/>
 				</Routes>
 			</div>
 		</Router>

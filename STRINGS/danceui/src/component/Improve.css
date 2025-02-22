@@ -1,64 +1,158 @@
-/* Improv.css */
-
-.container {
-    /* Adjusted Improv.css */
+/* General container styles */
 .container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 80px 20px; /* Adding top padding to avoid overlap */
-    font-family: Arial, sans-serif;
-  }
-  
-  }
-  
-  .area-improvements, .detailed-feedback, .accuracy-section {
-    background-color: rgb(60, 49, 4);
+    flex-wrap: wrap;
+    justify-content: space-between; /* Space out the components */
+    gap: 20px;
+    margin-top: 50px;
     padding: 20px;
-    margin: 10px 0;
-    width: 80%;
+    background-color: #f4f4f9; /* Light background for the container */
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh; /* Full page height */
+  }
+  
+  /* Area of improvements */
+  .area-improvements,
+  .detailed-feedback,
+  .accuracy-section,
+  .taskbar {
+    background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    width: 48%; /* Make them take 48% of the container width */
+    margin-bottom: 20px;
   }
   
-  h2 {
-    color: #333;
-  }
-  
-  ul {
+  .area-improvements ul,
+  .detailed-feedback ul {
     list-style-type: none;
     padding: 0;
   }
   
-  li {
-    margin: 10px 0;
+  .area-improvements li,
+  .detailed-feedback li {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
   }
   
-  .chat-btn {
-    background-color: #676410;
+  h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Ask Anything button */
+  .ask-anything-btn {
+    padding: 12px 24px;
+    background-color: #4CAF50; /* Green color for formal look */
     color: white;
     border: none;
-    padding: 10px 20px;
     border-radius: 5px;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    margin-left: 20px;
   }
   
-  .chat-btn:hover {
-    background-color: #3c2901;
+  .ask-anything-btn:hover {
+    background-color: #45a049; /* Slightly darker shade for hover effect */
+  }
+  
+  /* Taskbar */
+  .taskbar {
+    padding: 20px;
+    background-color: #f9f9f9; /* Soft gray background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 15px;
+    resize: vertical; /* Allow vertical resizing only */
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+  }
+  
+  textarea:focus {
+    border-color: #4CAF50; /* Green border on focus */
+    outline: none;
+  }
+  
+  textarea::placeholder {
+    color: #888;
+    font-style: italic;
+  }
+  
+  /* Accuracy Graph Section */
+  .accuracy-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
   }
   
   .accuracy-section button {
-    background-color: hsl(57, 86%, 23%);
+    padding: 10px 20px;
+    background-color: #28a745;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 4px;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
   }
   
   .accuracy-section button:hover {
-    background-color: #674403;
+    background-color: #218838;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+      flex-direction: column; /* Stack components vertically on smaller screens */
+    }
+  
+    .area-improvements,
+    .detailed-feedback,
+    .accuracy-section,
+    .taskbar {
+      width: 100%; /* Full width on mobile */
+      margin-bottom: 10px;
+    }
+  
+    h2 {
+      font-size: 1.2rem;
+    }
+  
+    .ask-anything-btn,
+    .accuracy-section button {
+      font-size: 0.9rem;
+      padding: 8px 15px;
+    }
+  
+    textarea {
+      font-size: 1rem;
+    }
   }
   

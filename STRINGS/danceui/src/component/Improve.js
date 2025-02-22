@@ -3,6 +3,7 @@ import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import './Improve.css'; // Import your CSS file
 
+
 const AreaOfImprovements = () => {
   return (
     <div className="area-improvements">
@@ -28,12 +29,41 @@ const DetailedFeedback = () => {
   );
 };
 
-const ChatPopup = () => {
-  const openChatGPT = () => {
-    window.open("https://chat.openai.com/", "_blank");
-  };
-  return <button className="chat-btn" onClick={openChatGPT}>Open ChatGPT</button>;
+const AskAnythingTaskbar = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const [question, setQuestion] = useState("");
+
+    const openTaskbar = () => {
+        setIsOpen(!isOpen); // Toggle the state between true and false
+      };
+      
+
+  return (
+    <div>
+    {/* The "Ask Anything" button */}
+    <button className="ask-anything-btn" onClick={openTaskbar}>
+      Ask Anything
+    </button>
+
+    {/* Conditionally render the taskbar based on the isOpen state */}
+    {isOpen && (
+      <div className="taskbar">
+        {/* Textarea for asking a question */}
+        <textarea
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)} // Update question state
+          placeholder="Ask a question..."
+          rows="4"
+          cols="50"
+        />
+      </div>
+    )}
+  </div>
+);
 };
+
+
 
 const AccuracyGraph = () => {
   const [showGraph, setShowGraph] = useState(false);
@@ -63,7 +93,7 @@ const Improve = () => {
     <div className="container">
       <AreaOfImprovements />
       <DetailedFeedback />
-      <ChatPopup />
+      <AskAnythingTaskbar />
       <AccuracyGraph />
     </div>
   );

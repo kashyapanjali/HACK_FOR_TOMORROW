@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -159,32 +158,52 @@
             border-radius: 0 4px 4px 0;
         }
 
-        /* New styles for graph section */
-        .graph-container {
-            margin-top: 30px;
-            border: 1px solid #ddd;
+        #detailedFeedback {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Modal styles for graph pop-out */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 900px;
             border-radius: 5px;
-            overflow: hidden;
-            background-color: white;
+            position: relative;
         }
 
-        .graph-title {
-            background-color: #f5f5f5;
-            padding: 10px 15px;
-            border-bottom: 1px solid #ddd;
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
             font-weight: bold;
-            color: #2c3e50;
+            cursor: pointer;
         }
 
-        .graph-content {
-            padding: 15px;
-            text-align: center;
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #000;
+            text-decoration: none;
         }
 
         .graph-image {
             max-width: 100%;
             height: auto;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             border-radius: 4px;
         }
 
@@ -208,9 +227,17 @@
             margin-right: 8px;
             border-radius: 3px;
         }
+
+        #analysisBtn {
+            margin-top: 20px;
+            background-color: #2ecc71;
+        }
+
+        #analysisBtn:hover {
+            background-color: #27ae60;
+        }
     </style>
 </head>
-
 <body>
     <h1>Advanced Pose Comparison Analysis</h1>
     
@@ -262,40 +289,7 @@
                 </div>
             </div>
             
-            <!-- New Graph Section -->
-            <div class="graph-container">
-                <div class="graph-title">Frame-by-Frame Comparison Analysis</div>
-                <div class="graph-content">
-                    <img id="comparisonGraph" class="graph-image" alt="Frame comparison graph" />
-                    <div class="graph-legend">
-                        <h4>Graph Legend:</h4>
-                        <div class="legend-item">
-                            <span class="legend-color" style="background-color: blue;"></span>
-                            <span>Overall Similarity Score (higher is better)</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color" style="background-color: red;"></span>
-                            <span>Areas Below Threshold (need improvement)</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color" style="background-color: #FF5733;"></span>
-                            <span>Right Arm Angle Difference</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color" style="background-color: #33FF57;"></span>
-                            <span>Left Arm Angle Difference</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color" style="background-color: #3357FF;"></span>
-                            <span>Right Leg Angle Difference</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color" style="background-color: #FF33F5;"></span>
-                            <span>Left Leg Angle Difference</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <button id="analysisBtn" style="display:none;">Analysis</button>
             
             <div class="feedback-section">
                 <h3>Areas for Improvement:</h3>
@@ -307,10 +301,29 @@
                 <div id="detailedFeedback"></div>
             </div>
         </div>
+
+        <!-- Modal for graph pop-out -->
+        <div id="graphModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">×</span>
+                <h3>Where Your Dance Needs Work</h3>
+                <img id="modalGraph" class="graph-image" alt="Dance similarity graph" />
+                <div class="graph-legend">
+                    <h4>Legend:</h4>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #f39c12;"></span>
+                        <span>Needs Work (Medium Difference)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #e74c3c;"></span>
+                        <span>Big Difference</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Preview videos when selected
         document.getElementById('video1').addEventListener('change', function(e) {
             previewVideo(e.target, '#preview1');
         });
@@ -328,7 +341,6 @@
             }
         }
         
-        // Handle form submission
         document.getElementById('compareForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(e.target);
@@ -338,7 +350,6 @@
             progress.style.display = 'block';
             result.style.display = 'none';
             
-            // Simulate progress (in a real app, you'd get updates from the server)
             let progressValue = 0;
             const progressBar = document.querySelector('.progress-bar div');
             const progressInterval = setInterval(() => {
@@ -362,13 +373,9 @@
                 const data = await response.json();
                 clearInterval(progressInterval);
                 
-                if (data.error) throw new Error(data.error);
-                
-                // Complete the progress bar
                 progressBar.style.width = '100%';
                 progressBar.textContent = '100%';
                 
-                // Show the result after a brief delay
                 setTimeout(() => {
                     displayResults(data);
                     progress.style.display = 'none';
@@ -383,37 +390,32 @@
         });
         
         function displayResults(data) {
-            // Display accuracy percentage
             const accuracyValue = document.getElementById('accuracyValue');
             const accuracyBar = document.getElementById('accuracyBar');
             accuracyValue.textContent = data.accuracy;
             
-            // Set the color and width of the accuracy bar
             const numericAccuracy = parseFloat(data.accuracy);
             accuracyBar.style.width = data.accuracy;
             
             if (numericAccuracy >= 80) {
-                accuracyBar.style.backgroundColor = '#2ecc71'; // Green
+                accuracyBar.style.backgroundColor = '#2ecc71';
             } else if (numericAccuracy >= 60) {
-                accuracyBar.style.backgroundColor = '#f39c12'; // Orange
+                accuracyBar.style.backgroundColor = '#f39c12';
             } else {
-                accuracyBar.style.backgroundColor = '#e74c3c'; // Red
+                accuracyBar.style.backgroundColor = '#e74c3c';
             }
             
-            // Display the comparison graph if available
+            const analysisBtn = document.getElementById('analysisBtn');
+            const modalGraph = document.getElementById('modalGraph');
             if (data.graph_url) {
-                const graphImg = document.getElementById('comparisonGraph');
-                // Add timestamp to prevent caching
-                graphImg.src = data.graph_url + '?t=' + new Date().getTime();
-                document.querySelector('.graph-container').style.display = 'block';
+                modalGraph.src = data.graph_url + '?t=' + new Date().getTime();
+                analysisBtn.style.display = 'block';
             } else {
-                document.querySelector('.graph-container').style.display = 'none';
+                analysisBtn.style.display = 'none';
             }
             
-            // Display areas for improvement
             const improvementList = document.getElementById('improvementList');
             improvementList.innerHTML = '';
-            
             if (data.improvement_areas && data.improvement_areas.length > 0) {
                 data.improvement_areas.forEach(area => {
                     const item = document.createElement('div');
@@ -428,15 +430,14 @@
                 improvementList.appendChild(item);
             }
             
-            // Display detailed feedback
             const detailedFeedback = document.getElementById('detailedFeedback');
             detailedFeedback.innerHTML = '';
-            
             if (data.detailed_feedback && data.detailed_feedback.length > 0) {
                 data.detailed_feedback.forEach(feedback => {
                     const item = document.createElement('div');
                     item.className = 'feedback-item';
-                    item.textContent = feedback;
+                    const [timestamp, advice] = feedback.split(': ', 2); // Split on first ": "
+                    item.innerHTML = `<strong>${timestamp}:</strong> ${advice}`;
                     detailedFeedback.appendChild(item);
                 });
             } else {
@@ -446,7 +447,25 @@
                 detailedFeedback.appendChild(item);
             }
         }
+
+        // Modal functionality
+        const modal = document.getElementById('graphModal');
+        const analysisBtn = document.getElementById('analysisBtn');
+        const closeBtn = document.querySelector('.close-btn');
+
+        analysisBtn.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
     </script>
 </body>
-
 </html>

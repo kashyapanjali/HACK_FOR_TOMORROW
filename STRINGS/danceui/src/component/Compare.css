@@ -138,7 +138,8 @@ input[type="file"],
 .compare {
 	text-align: center;
 	margin-top: 20px;
-	color: white;
+	color: rgb(186, 20, 20);
+	background-color: gray;
 	padding: 12px 20px;
 	border-radius: 5px;
 	font-size: 15px;
@@ -154,13 +155,13 @@ input[type="file"],
 
 .compare.disabled {
 	background-color: gray;
-	cursor: not-allowed;
 }
 
 /* Accuracy Message */
 .accuracy-message {
 	margin-top: 20px;
 	font-size: 18px;
+	color: pink;
 }
 
 /* Responsive Design */

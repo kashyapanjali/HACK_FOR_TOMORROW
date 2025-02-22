@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import Webcam from "react-webcam";
 import { Upload, Camera, Play, Video } from "lucide-react";
 import "./Compare.css";
-import leftImage from "../assets/Picture3.png"; // Importing the image
 
 function Compare() {
 	const [referenceVideo, setReferenceVideo] = useState(null);

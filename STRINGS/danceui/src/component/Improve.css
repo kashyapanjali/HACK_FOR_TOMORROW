@@ -1,0 +1,64 @@
+/* Improv.css */
+
+.container {
+    /* Adjusted Improv.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 20px; /* Adding top padding to avoid overlap */
+    font-family: Arial, sans-serif;
+  }
+  
+  }
+  
+  .area-improvements, .detailed-feedback, .accuracy-section {
+    background-color: rgb(60, 49, 4);
+    padding: 20px;
+    margin: 10px 0;
+    width: 80%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin: 10px 0;
+  }
+  
+  .chat-btn {
+    background-color: #676410;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .chat-btn:hover {
+    background-color: #3c2901;
+  }
+  
+  .accuracy-section button {
+    background-color: hsl(57, 86%, 23%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .accuracy-section button:hover {
+    background-color: #674403;
+  }
+  

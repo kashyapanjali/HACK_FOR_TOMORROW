@@ -1,0 +1,63 @@
+/* Basic Reset */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+.auth-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: #f0cb64f4;
+}
+
+.auth-box {
+	background: white;
+	padding: 30px;
+	border-radius: 8px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	width: 300px;
+	text-align: center;
+}
+
+.auth-box h2 {
+	margin-bottom: 20px;
+	color: #ff758c;
+}
+
+.auth-box input {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.auth-box button {
+	width: 100%;
+	padding: 10px;
+	background: #ff758c;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.auth-box button:hover {
+	background: #ff5773;
+}
+
+.toggle-text {
+	margin-top: 15px;
+	color: #555;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.toggle-text:hover {
+	color: #f0cb64f4;
+}
